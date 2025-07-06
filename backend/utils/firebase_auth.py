@@ -7,12 +7,13 @@ import logging
 
 # Initialize Firebase Admin SDK (singleton)
 if not firebase_admin._apps:
-    # Try to load credentials from environment variable first
+    # Try to load credentials from environment variable first (preferred for production)
     cred_json = os.getenv('FIREBASE_ADMIN_CREDENTIALS_JSON')
     if cred_json:
         try:
             cred_dict = json.loads(cred_json)
             cred = credentials.Certificate(cred_dict)
+            logging.info("Firebase credentials loaded from environment variable")
         except json.JSONDecodeError:
             logging.error("Invalid FIREBASE_ADMIN_CREDENTIALS_JSON format")
             raise
@@ -20,8 +21,14 @@ if not firebase_admin._apps:
         # Fallback to file path
         cred_path = os.getenv('FIREBASE_ADMIN_CREDENTIALS')
         if not cred_path:
-            raise ValueError("Either FIREBASE_ADMIN_CREDENTIALS_JSON or FIREBASE_ADMIN_CREDENTIALS must be set")
+            # Default fallback path (adjusted for Railway's root directory being 'backend/')
+            cred_path = 'fatoora-b2d0b-firebase-adminsdk-fbsvc-364c3ffd79.json'
+        
+        if not os.path.exists(cred_path):
+            raise ValueError(f"Firebase credentials file not found at {cred_path}. Please set FIREBASE_ADMIN_CREDENTIALS_JSON environment variable with the credentials JSON content.")
+        
         cred = credentials.Certificate(cred_path)
+        logging.info(f"Firebase credentials loaded from file: {cred_path}")
     
     firebase_admin.initialize_app(cred)
 
