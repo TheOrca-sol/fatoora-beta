@@ -55,7 +55,7 @@ function SidebarNav({ isMobile, onClose }) {
     { label: t('clients'), href: '/app/clients', icon: Users },
     { label: t('invoices'), href: '/app/invoices', icon: FileText },
     { label: t('export'), href: '/app/export', icon: Download },
-    { label: t('team'), href: '/app/team', icon: Shield },
+    { label: t('business'), href: '/app/team', icon: Shield },
   ];
 
   return (
