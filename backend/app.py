@@ -15,8 +15,14 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Initialize CORS
-    CORS(app, origins=['http://localhost:5173', 'https://*.vercel.app', 'https://*.netlify.app'])
+    # Initialize CORS with explicit domains
+    CORS(app, origins=[
+        'http://localhost:5173', 
+        'https://*.vercel.app', 
+        'https://*.netlify.app',
+        'https://fatoora-beta.vercel.app',  # Explicit domain
+        'https://fatoora-beta-production.up.railway.app'  # Self-reference for testing
+    ])
 
     # Initialize extensions
     db.init_app(app)
