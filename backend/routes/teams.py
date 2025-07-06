@@ -1,9 +1,9 @@
 from flask import Blueprint, request, jsonify, abort, send_from_directory
-from backend.utils.firebase_auth import verify_firebase_token
-from backend.models.team import Team
-from backend.models.teammembership import TeamMembership
-from backend.models.user import User
-from backend.database import db
+from utils.firebase_auth import verify_firebase_token
+from models.team import Team
+from models.teammembership import TeamMembership
+from models.user import User
+from database import db
 import os
 
 teams_bp = Blueprint('teams', __name__)

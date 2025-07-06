@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from backend.utils.firebase_auth import verify_firebase_token
+from utils.firebase_auth import verify_firebase_token
 
 auth_bp = Blueprint('auth', __name__)
 

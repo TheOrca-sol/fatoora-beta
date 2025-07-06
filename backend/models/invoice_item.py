@@ -1,4 +1,4 @@
-from backend.database import db
+from database import db
 
 class InvoiceItem(db.Model):
     __tablename__ = 'invoice_items'

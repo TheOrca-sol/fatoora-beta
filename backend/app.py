@@ -3,7 +3,7 @@ from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
 from flask_migrate import Migrate
-from backend.database import db
+from database import db
 
 # Load environment variables from .env file in backend directory
 load_dotenv(os.path.join(os.path.dirname(__file__), '.env'), override=True)
@@ -24,18 +24,18 @@ def create_app():
 
     # Import models WITHIN app context to avoid circular imports
     with app.app_context():
-        from backend.models import user, team, teammembership, client, invoice, invoice_item
+        from models import user, team, teammembership, client, invoice, invoice_item
         
         # Create tables if they don't exist (for development)
         db.create_all()
 
     # Import routes AFTER models are loaded
-    from backend.routes.auth import auth_bp
-    from backend.routes.clients import clients_bp
-    from backend.routes.invoices import invoices_bp
-    from backend.routes.dashboard import dashboard_bp
-    from backend.routes.export import export_bp
-    from backend.routes.teams import teams_bp
+    from routes.auth import auth_bp
+    from routes.clients import clients_bp
+    from routes.invoices import invoices_bp
+    from routes.dashboard import dashboard_bp
+    from routes.export import export_bp
+    from routes.teams import teams_bp
     
     app.register_blueprint(auth_bp, url_prefix='/api/auth')
     app.register_blueprint(clients_bp, url_prefix='/api/clients')

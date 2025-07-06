@@ -1,4 +1,4 @@
-from backend.database import db
+from database import db
 
 class Client(db.Model):
     __tablename__ = 'clients'

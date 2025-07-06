@@ -1,12 +1,12 @@
 from flask import Blueprint, jsonify, send_file, abort
-from backend.utils.firebase_auth import verify_firebase_token
-from backend.models.invoice import Invoice
-from backend.models.client import Client
-from backend.models.teammembership import TeamMembership
-from backend.models.user import User
-from backend.models.team import Team
-from backend.database import db
-from backend.utils.pdf import render_invoice_pdf
+from utils.firebase_auth import verify_firebase_token
+from models.invoice import Invoice
+from models.client import Client
+from models.teammembership import TeamMembership
+from models.user import User
+from models.team import Team
+from database import db
+from utils.pdf import render_invoice_pdf
 import io
 import csv
 import zipfile
