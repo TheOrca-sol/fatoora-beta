@@ -9,4 +9,7 @@ export default defineConfig({
       '/api': 'http://localhost:5000', // or wherever your Flask backend runs
     },
   },
+  build: {
+    outDir: 'dist',
+  },
 })
